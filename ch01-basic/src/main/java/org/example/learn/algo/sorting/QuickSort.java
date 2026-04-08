@@ -22,16 +22,22 @@ public class QuickSort {
         quickSort(arr, pivotIndex + 1, right);
     }
 
-    // 分区函数
+    /**
+     * 循环不变式: 保持[left, i)都是小于pivot的
+     * 意味着: 将小于pivot的移动到[left, i),留下[i,right)为大于等于pivot的,
+     * 最后将arr[right]与arr[i]交换位置,依然不影响左侧是小于的,右侧是不小于的
+     */
     private static int partition(int[] arr, int left, int right) {
-        // 选最右边元素作为基准 pivot([left,right]中任意值)
+        // 选最右边元素作为基准 pivot([left,right]中任意一个位置都行)
         int pivot = arr[right];
-        int i = left;
 
-        for (int j = left; j < right; j++) {
+        // 经过调整,最终pivot未来在arr[i]这个位置,且pivot左侧都比自己小,右侧都不比自己小
+        // 那么i必定满足 right>=i>=left,所以i的初始值是left
+        int i = left;
+        for (int j = left; j < right; j++) {                          // 遍历pivot左侧的所有元素
             if (arr[j] < pivot) {
                 swap(arr, i, j);
-                i++;
+                i++;                                                  // 遍历pivot左侧的所有元素的过程中,当遇到元素比pivot小,那么最终的i值肯定不在当前位置,至少在其后,所以要交换当前arr[i]与当前元素arr[j],并i++
             }
         }
 
@@ -45,21 +51,26 @@ public class QuickSort {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+        log(arr);
     }
 
-    // 测试
-    public static void main(String[] args) {
-        int[] arr = {5, 2, 9, 1, 5, 6, 3};
-        System.out.println("排序前：");
+    private static void log(int[] arr){
         for (int num : arr) {
             System.out.print(num + " ");
         }
+        System.out.println();
+    }
+
+
+    // 测试
+    public static void main(String[] args) {
+        int[] arr = {5, 2, 9, 1, 4, 2, 3};
+        System.out.println("排序前：");
+        log(arr);
 
         quickSort(arr);
 
         System.out.println("\n排序后：");
-        for (int num : arr) {
-            System.out.print(num + " ");
-        }
+        log(arr);
     }
 }
