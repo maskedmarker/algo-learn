@@ -1,5 +1,11 @@
 package org.example.learn.algo.sorting;
 
+/**
+ * 使用递归的思想
+ * 随便找一个数组中的值(称为pivot), 除去pivot,通过移动操作,将数组分为2块, 左侧都小于pivot, 右侧不小于pivot (左侧/右侧不必排序)
+ * 然后递归
+ * 最终会收敛到从小到大排序
+ */
 public class QuickSort {
 
     public static void quickSort(int[] arr) {
