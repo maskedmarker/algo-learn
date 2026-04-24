@@ -1,4 +1,4 @@
-package org.example.learn.algo;
+package org.example.learn.algo.biz.cache;
 
 import java.util.HashMap;
 import java.util.Map;
